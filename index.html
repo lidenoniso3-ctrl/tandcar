@@ -35,23 +35,33 @@
 </header>
 
 <main id="app">
-<!-- ============ DETAILS MODAL ============ -->
-<dialog id="details-modal" class="modal details-modal">
-  <div class="modal-head">
-    <div class="modal-titles">
-      <h3 id="modal-title">تفاصيل السيارة</h3>
-      <p id="modal-subtitle" class="modal-subtitle"></p>
-    </div>
-    <button class="icon-btn close" onclick="closeDetailsModal()" aria-label="إغلاق">✕</button>
-  </div>
-  <div class="modal-body" id="modal-body"></div>
-</dialog>
 
-<!-- Toast -->
-<div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <!-- ============ VIEW: HOME ============ -->
+  <section id="view-home" class="view active">
+    <div class="hero">
+      <h1>اكتشف أي سيارة في العالم</h1>
+      <p>أكثر من 10,000 موديل ومواصفات كاملة من قاعدة بيانات NHTSA الرسمية</p>
+      <div class="search-box">
+        <input id="search-input" type="search" placeholder="ابحث عن ماركة أو موديل… (مثال: Toyota, BMW, Camry)" autocomplete="off">
+        <button id="search-btn" class="btn primary">ابحث</button>
+      </div>
+      <div id="search-results" class="search-results"></div>
+    </div>
+
+    <div class="ad-slot" data-ad="top-home"></div>
+
+    <div class="section">
+      <div class="section-head">
+        <h2>الماركات الشهيرة</h2>
+        <button class="link" data-view="makes">عرض الكل ←</button>
+      </div>
+      <div id="popular-makes" class="grid grid-makes"></div>
+    </div>
+
+    <div class="ad-slot" data-ad="mid-home"></div>
   </section>
 
-  <!-- MAKES -->
+  <!-- ============ VIEW: MAKES ============ -->
   <section id="view-makes" class="view">
     <div class="section">
       <div class="section-head">
@@ -65,7 +75,7 @@
     <div class="ad-slot" data-ad="bottom-makes"></div>
   </section>
 
-  <!-- MODELS -->
+  <!-- ============ VIEW: MODELS ============ -->
   <section id="view-models" class="view">
     <div class="section">
       <button class="back-btn" onclick="goHome(event)">← رجوع</button>
@@ -80,7 +90,7 @@
     <div class="ad-slot" data-ad="bottom-models"></div>
   </section>
 
-  <!-- VIN -->
+  <!-- ============ VIEW: VIN ============ -->
   <section id="view-vin" class="view">
     <div class="section">
       <div class="section-head">
@@ -96,7 +106,7 @@
     <div class="ad-slot" data-ad="bottom-vin"></div>
   </section>
 
-  <!-- FAVORITES -->
+  <!-- ============ VIEW: FAVORITES ============ -->
   <section id="view-favorites" class="view">
     <div class="section">
       <div class="section-head">
@@ -115,6 +125,21 @@
 
 </main>
 
+<!-- ============ DETAILS MODAL (خارج main) ============ -->
+<dialog id="details-modal" class="modal details-modal">
+  <div class="modal-head">
+    <div class="modal-titles">
+      <h3 id="modal-title">تفاصيل السيارة</h3>
+      <p id="modal-subtitle" class="modal-subtitle"></p>
+    </div>
+    <button class="icon-btn close" onclick="closeDetailsModal()" aria-label="إغلاق">✕</button>
+  </div>
+  <div class="modal-body" id="modal-body"></div>
+</dialog>
+
+<!-- ============ Toast (div واحد فقط) ============ -->
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
 <footer class="footer">
   <div class="footer-inner">
     <div><strong>CarSpecs</strong> — مواصفات السيارات</div>
@@ -123,9 +148,6 @@
     </div>
   </div>
 </footer>
-
-<!-- Toast -->
-<div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 <script src="app.js"></script>
 </body>
