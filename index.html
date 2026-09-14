@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CarSpecs — مواصفات وأسعار جميع السيارات</title>
+  <meta name="description" content="قاعدة بيانات شاملة لجميع ماركات وموديلات السيارات مع مواصفات كاملة وتفاصيل تقنية دقيقة.">
+  <meta name="theme-color" content="#0ea5e9">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="#" class="brand" onclick="goHome(event)">
+      <img src="assets/logo.svg" alt="" width="36" height="36">
+      <span>CarSpecs</span>
+    </a>
+    <nav class="nav">
+      <button class="nav-btn active" data-view="home">الرئيسية</button>
+      <button class="nav-btn" data-view="makes">الماركات</button>
+      <button class="nav-btn" data-view="vin">فك VIN</button>
+      <button class="nav-btn" data-view="favorites">
+        المفضلة
+        <span id="fav-count" class="fav-badge" hidden>0</span>
+      </button>
+    </nav>
+    <button id="theme-btn" class="icon-btn" aria-label="الوضع الليلي">🌙</button>
+  </div>
+</header>
+
+<main id="app">
+
+  <!-- HOME -->
+  <section id="view-home" class="view active">
+    <div class="hero">
+      <h1>اكتشف أي سيارة في العالم</h1>
+      <p>أكثر من 10,000 موديل ومواصفات كاملة من قاعدة بيانات NHTSA الرسمية</p>
+      <div class="search-box">
+        <input id="search-input" type="search" placeholder="ابحث عن ماركة أو موديل… (مثال: Toyota, BMW, Camry)" autocomplete="off">
+        <button id="search-btn" class="btn primary">ابحث</button>
+      </div>
+      <div id="search-results" class="search-results"></div>
+    </div>
+
+    <div class="ad-slot" data-ad="top-home"></div>
+
+    <div class="section">
+      <div class="section-head">
+        <h2>الماركات الشهيرة</h2>
+        <button class="link" data-view="makes">عرض الكل ←</button>
+      </div>
+      <div id="popular-makes" class="grid grid-makes"></div>
+    </div>
+
+    <div class="ad-slot" data-ad="mid-home"></div>
+  </section>
+
+  <!-- MAKES -->
+  <section id="view-makes" class="view">
+    <div class="section">
+      <div class="section-head">
+        <h2>جميع الماركات</h2>
+        <span id="makes-count" class="count"></span>
+      </div>
+      <input id="makes-filter" class="filter-input" type="search" placeholder="فلترة الماركات…">
+      <div id="all-makes" class="grid grid-makes"></div>
+      <div id="makes-loading" class="loading">جارٍ تحميل الماركات…</div>
+    </div>
+    <div class="ad-slot" data-ad="bottom-makes"></div>
+  </section>
+
+  <!-- MODELS -->
+  <section id="view-models" class="view">
+    <div class="section">
+      <button class="back-btn" onclick="goHome(event)">← رجوع</button>
+      <div class="section-head">
+        <h2 id="models-title">موديلات الماركة</h2>
+        <span id="models-count" class="count"></span>
+      </div>
+      <input id="models-filter" class="filter-input" type="search" placeholder="فلترة الموديلات…">
+      <div id="models-grid" class="grid grid-models"></div>
+      <div id="models-loading" class="loading">جارٍ تحميل الموديلات…</div>
+    </div>
+    <div class="ad-slot" data-ad="bottom-models"></div>
+  </section>
+
+  <!-- VIN -->
+  <section id="view-vin" class="view">
+    <div class="section">
+      <div class="section-head">
+        <h2>فك تشفير رقم الهيكل (VIN)</h2>
+      </div>
+      <p class="hint">أدخل رقم VIN (17 حرفًا) للحصول على المواصفات الكاملة للسيارة مباشرة من قاعدة NHTSA.</p>
+      <div class="search-box">
+        <input id="vin-input" type="text" placeholder="مثال: 1HGCM82633A004352" maxlength="17" style="text-transform:uppercase;">
+        <button id="vin-btn" class="btn primary">فك التشفير</button>
+      </div>
+      <div id="vin-result" class="vin-result"></div>
+    </div>
+    <div class="ad-slot" data-ad="bottom-vin"></div>
+  </section>
+
+  <!-- FAVORITES -->
+  <section id="view-favorites" class="view">
+    <div class="section">
+      <div class="section-head">
+        <h2>المفضلة ⭐</h2>
+        <button id="clear-favs" class="link danger">حذف الكل</button>
+      </div>
+      <div id="favorites-grid" class="grid grid-models"></div>
+      <div id="favorites-empty" class="empty-state" hidden>
+        <div class="empty-icon">⭐</div>
+        <p>لا توجد سيارات في المفضلة بعد.</p>
+        <button class="btn primary" data-view="makes" style="margin-top:20px;">تصفح الماركات</button>
+      </div>
+    </div>
+    <div class="ad-slot" data-ad="bottom-favorites"></div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div><strong>CarSpecs</strong> — مواصفات السيارات</div>
+    <div class="footer-note">
+      البيانات مقدمة من NHTSA vPIC API الرسمية • © <span id="year"></span>
+    </div>
+  </div>
+</footer>
+
+<!-- Toast -->
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
