@@ -35,30 +35,20 @@
 </header>
 
 <main id="app">
-
-  <!-- HOME -->
-  <section id="view-home" class="view active">
-    <div class="hero">
-      <h1>اكتشف أي سيارة في العالم</h1>
-      <p>أكثر من 10,000 موديل ومواصفات كاملة من قاعدة بيانات NHTSA الرسمية</p>
-      <div class="search-box">
-        <input id="search-input" type="search" placeholder="ابحث عن ماركة أو موديل… (مثال: Toyota, BMW, Camry)" autocomplete="off">
-        <button id="search-btn" class="btn primary">ابحث</button>
-      </div>
-      <div id="search-results" class="search-results"></div>
+<!-- ============ DETAILS MODAL ============ -->
+<dialog id="details-modal" class="modal details-modal">
+  <div class="modal-head">
+    <div class="modal-titles">
+      <h3 id="modal-title">تفاصيل السيارة</h3>
+      <p id="modal-subtitle" class="modal-subtitle"></p>
     </div>
+    <button class="icon-btn close" onclick="closeDetailsModal()" aria-label="إغلاق">✕</button>
+  </div>
+  <div class="modal-body" id="modal-body"></div>
+</dialog>
 
-    <div class="ad-slot" data-ad="top-home"></div>
-
-    <div class="section">
-      <div class="section-head">
-        <h2>الماركات الشهيرة</h2>
-        <button class="link" data-view="makes">عرض الكل ←</button>
-      </div>
-      <div id="popular-makes" class="grid grid-makes"></div>
-    </div>
-
-    <div class="ad-slot" data-ad="mid-home"></div>
+<!-- Toast -->
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
   </section>
 
   <!-- MAKES -->
